@@ -14,6 +14,7 @@ int main(void)
 {
 
     FILE *fp;
+    FILE *fp2;
     char buf[64];
     int readlen=0;
     int row =1;
@@ -24,6 +25,9 @@ int main(void)
 
     fp = fopen("./HelTec.hex","r");
     if(fp==NULL)
+        perror("error open");
+    fp2= fopen("./HelTec.bin","wb");
+    if(fp2==NULL)
         perror("error open");
     /* read a line */
 
@@ -36,29 +40,33 @@ int main(void)
         {
             printf("%02x ",HexResArr[j]);
         }
+       
         printf("\n");
+        if(datlen ==16)
+        fwrite(HexResArr,1,datlen,fp2);
         // printf("%d:%s\n",deslen,desArr);
         // puts(buf);
     }
-    uint8 mydata[]={0x02,0x00,0x00,0x04,0x08,0x00};
-    uint8 checksum=0 ;
-    int i=0;
+    // uint8 mydata[]={0x02,0x00,0x00,0x04,0x08,0x00};
+    // uint8 checksum=0 ;
+    // int i=0;
 
-    for( i=0;i<sizeof(mydata);i++)
-    {
-        checksum +=mydata[i];
+    // for( i=0;i<sizeof(mydata);i++)
+    // {
+    //     checksum +=mydata[i];
 
-    }
+    // }
 
-    printf("%s>befor checksum = 0x%x\n",__TIME__,checksum);
-
-
-    checksum = 0x100 - checksum;
+    // printf("%s>befor checksum = 0x%x\n",__TIME__,checksum);
 
 
-    printf("%s>after buma the check sum = 0x%x\n",__TIME__,checksum);
+    // checksum = 0x100 - checksum;
+
+
+    // printf("%s>after buma the check sum = 0x%x\n",__TIME__,checksum);
 
     fclose(fp);
+    fclose(fp2);
 
     return 0;
 }
