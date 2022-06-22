@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<string.h>
+#include<ctype.h>
+
 typedef unsigned char uint8;
 typedef unsigned short uint16;
 typedef unsigned int uint32;
@@ -17,6 +19,8 @@ int main(void)
     int row =1;
     char desArr[64];
     uint8 deslen;
+    uint8 HexResArr[64];
+    uint16 datlen;
 
     fp = fopen("./HelTec.hex","r");
     if(fp==NULL)
@@ -27,7 +31,13 @@ int main(void)
 
         //printf("the len of the buf is %d\n",strlen( buf));
         deslen=prasedate(buf,strlen(buf),desArr);
-        printf("%d:%s\n",deslen,desArr);
+        datlen=stringToHexArr(desArr,deslen,HexResArr);
+        for(int j=0;j<datlen;j++)
+        {
+            printf("%02x ",HexResArr[j]);
+        }
+        printf("\n");
+        // printf("%d:%s\n",deslen,desArr);
         // puts(buf);
     }
     uint8 mydata[]={0x02,0x00,0x00,0x04,0x08,0x00};
@@ -68,9 +78,26 @@ uint16 prasedate(uint8 *data,uint16 len,char *destArr)
 
 }
 
+uint8 charToByte(char c)
+{
+    if('0'<= c && c <='9')
+        return c -'0';
+    if( ('a'<=c && c <='f') || ('A'<=c && c <='F'))
+        return toupper(c)-'A'+0x0a;
+}
+
 
 uint16 stringToHexArr(char *str,uint16 len, uint8 *HexArr)
 {
-
+    if(str==NULL|| len ==0|| HexArr==NULL)
+        return 0;
+    
+    for(int i=0; i < len/2; i++)
+    {
+        HexArr[i] = (charToByte(*str++))<<4;
+        HexArr[i] += charToByte(*str++);
+    }
+    
+    return len /2;
 
 }
