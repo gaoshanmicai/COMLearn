@@ -25,10 +25,17 @@ int main(void)
 
     fp = fopen("./HelTec.hex","r");
     if(fp==NULL)
+    {
         perror("error open");
+        return -1;
+
+    } 
     fp2= fopen("./HelTec.bin","wb");
     if(fp2==NULL)
+    { 
         perror("error open");
+        return -1;
+    }
     /* read a line */
 
     while(fgets(buf,64,fp)!=NULL){    // switch the line ASCII to HEX data 
@@ -43,7 +50,7 @@ int main(void)
        
         printf("\n");
         if(datlen ==16)
-        fwrite(HexResArr,1,datlen,fp2);
+        fwrite(HexResArr,sizeof(char),datlen,fp2);
         // printf("%d:%s\n",deslen,desArr);
         // puts(buf);
     }
