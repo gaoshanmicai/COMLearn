@@ -9,4 +9,4 @@
 6. 1 byte的校验和域
 7. 最后以回车换行结束
 8. ![1656384736975](image/如何来解析Hex文件/1656384736975.png)
-9. ![图片描述myimage.png](myimage.png)
+9. 转换bin文件后![图片描述myimage.png](myimage.png)
