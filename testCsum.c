@@ -100,6 +100,18 @@ uint8 charToByte(char c)
     if( ('a'<=c && c <='f') || ('A'<=c && c <='F'))
         return toupper(c)-'A'+0x0a;
 }
+//每次传入数组为2的字符串，然后拼接成 一个十六进制数。
+uint8 GetHex(uint8 *Asc)
+{
+    uint8 Hex;
+    Hex =(Asc[0]&0x0f)<<4;
+    if(Asc[0]>='A') Hex+=0x90;
+        Hex |=(Asc[1]&0x0f);
+    if(Asc[1]>='A') Hex+=0x90;
+        
+    return Hex;
+
+}
 
 
 uint16 stringToHexArr(char *str,uint16 len, uint8 *HexArr)
