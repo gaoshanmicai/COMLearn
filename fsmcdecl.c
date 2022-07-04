@@ -91,6 +91,7 @@ void (*nextstate)(void) = initialize;
 
 int main() {
     /* 在不同的状态间切换，直到指针值为NULL */
+    printf("the process start \n");
     while (nextstate != NULL)
         (*nextstate)();
     return 0;
