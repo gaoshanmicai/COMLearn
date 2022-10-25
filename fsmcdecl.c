@@ -83,18 +83,50 @@ void gettoken(void) { /* 读取下一个标记到”this“ */
     return;
 }
 
+typedef void(*StateHandler)(void ) ;
+
+ void (*nextstate)(void) = initialize;
 /* 状态函数 */
 void initialize(), get_array(), get_params(), get_lparen(), get_ptr_part(),
         get_type();
 
-void (*nextstate)(void) = initialize;
 
-int main() {
-    /* 在不同的状态间切换，直到指针值为NULL */
-    printf("the process start \n");
-    while (nextstate != NULL)
-        (*nextstate)();
-    return 0;
+
+StateHandler myfun[6]=
+{
+    initialize,
+    get_array,
+    get_params,
+    get_lparen,
+    get_ptr_part,
+    get_type,
+    NULL,
+};
+
+
+
+
+
+
+
+// int main() {
+//     /* 在不同的状态间切换，直到指针值为NULL */
+//     printf("the process start \n");
+//     while (nextstate != NULL)
+//         (*nextstate)();
+//     return 0;
+// }
+
+int main(){
+    printf("the process start\n");
+    StateHandler *mfunptr;
+    mfunptr = myfun;
+    while(*mfunptr!=NULL)
+    {
+        (*mfunptr)();
+        mfunptr++;
+
+    } 
 }
 
 void initialize() {

@@ -53,3 +53,49 @@ int dll_insert(Node *rootp,int value)
 
     return 1;
 }
+
+int dlinklenCount(Node *rootp)
+{
+    int countLen =0;
+    if(rootp ==NULL)
+        return 0;
+    for(;rootp!=NULL; rootp = rootp->fwd)
+    {
+        countLen++;
+
+    }
+
+    return countLen;
+
+}
+
+Node * dlinkSearchValue(Node *rootp,int value)
+{
+    Node *spt;
+    if(rootp==NULL)
+        return NULL;
+    
+    for(spt = rootp ;spt!=NULL;spt =spt->fwd)
+    {
+        if(spt->value == value)
+            return spt;
+
+    }
+    return NULL;
+}
+
+
+int print_linklist(Node *rootp)
+{
+    Node *this;
+    Node *next;
+    Node *newnode;
+
+    for(this = rootp;(next = this->fwd)!=NULL;this = next)
+    {
+        
+        printf("the root value =%d\n",this->value);
+    }
+    return 0;
+
+}
