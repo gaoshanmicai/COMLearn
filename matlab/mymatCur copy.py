@@ -8,32 +8,32 @@ import datetime
 import time
 
 
-excel=load_workbook("DataCur.xlsx")
-sheet = excel["Sheet1"]
+excel=load_workbook("DAT30.xlsx")
+sheet = excel["DAT30"]
 
 fig, ax1 = plt.subplots()
 
 # excel1=load_workbook("DATc.xlsx")
 # sheet1 = excel1["DATc"]
 
-time_data=[i.value for i in sheet['D'][2:]]
-Current_data =[i.value for i in sheet['E'][2:]]
-volte_data =[i.value for i in sheet['F'][2:]]
+time_data=[i.value for i in sheet['C'][1:]]
+Current_data =[i.value for i in sheet['A'][1:]]
+volte_data =[i.value for i in sheet['A'][1:]]
 
 # time_data1=[i.value for i in sheet1['C'][1:]]
 # Current_data1 =[i.value for i in sheet1['A'][1:]]
 
-color = 'tab:red'
+color = 'tab:purple'
 ax1.set_xlabel('time (s)')
-ax1.set_ylabel('Volt', color=color)
+ax1.set_ylabel('Current(A)', color=color)
 ax1.plot(time_data, volte_data, color=color)
 ax1.tick_params(axis='y', labelcolor=color)
 
 
 ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
 
-color = 'tab:blue'
-ax2.set_ylabel('Current', color=color)  # we already handled the x-label with ax1
+color = 'tab:green'
+ax2.set_ylabel('Current(A)', color=color)  # we already handled the x-label with ax1
 ax2.plot(time_data, Current_data, color=color)
 ax2.tick_params(axis='y', labelcolor=color)
 
@@ -46,6 +46,7 @@ fig.tight_layout()  # otherwise the right y-label is slightly clipped
 # plt.ylabel("Current(A)")
 # plt.ylim(0,2)
 plt.grid(color = 'r', linestyle = '--', linewidth = 0.5)
+#plt.savefig("theCurrent.png")
 
 plt.show()
 
