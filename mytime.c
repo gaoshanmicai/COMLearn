@@ -15,7 +15,7 @@ int array[]={23,24,25,26};
     const char arr[4]="yua";
 
 
-    arr[1]='k';
+    //arr[1]='k';
 
 
     
