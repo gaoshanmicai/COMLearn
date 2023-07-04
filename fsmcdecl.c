@@ -85,14 +85,14 @@ void gettoken(void) { /* 读取下一个标记到”this“ */
 
 typedef void(*StateHandler)(void ) ;
 
- void (*nextstate)(void) = initialize;
 /* 状态函数 */
 void initialize(), get_array(), get_params(), get_lparen(), get_ptr_part(),
         get_type();
 
+ void (*nextstate)(void) = initialize;
 
-
-StateHandler myfun[6]=
+#define MAX_STATE_NUM 7
+StateHandler myfun[MAX_STATE_NUM]=
 {
     initialize,
     get_array,

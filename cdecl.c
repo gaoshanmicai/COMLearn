@@ -59,6 +59,7 @@ void gettoken(void)/*读取下一个标记到 this*/
 	if(*p=='*')
 	{
 		strcpy(this.string,"pointer to");
+
 		this.type='*';
 		return ;
 	}
@@ -136,6 +137,16 @@ void deal_with_declarator()
 		}
 	}
 }
+
+void foo(int x)
+{
+	int buf[10];
+	if(x ==1000)
+		buf[x]=0;
+}
+
+
+
 int main()
 {
 	/*将标记呀入堆栈中，直到遇见标识符*/
